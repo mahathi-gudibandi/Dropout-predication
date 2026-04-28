@@ -92,9 +92,7 @@ The model uses multiple data inputs:
 * Inclusion of mental health analytics
 * Automated intervention systems
 
-📌 Conclusion
 
-Combining **machine learning** with **personalized support systems** provides an effective solution to reduce student dropout rates and enhance overall educational outcomes.
 
 
 
