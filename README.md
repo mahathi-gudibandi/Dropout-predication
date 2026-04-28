@@ -94,14 +94,6 @@ The model uses multiple data inputs:
 
 
 
-👥 Team Members
-
-* G. Mahathi
-* Y. Sri Vatsav
-* M. Sree Vathsav
-* A. Rahul
-
-
 
 📌 Conclusion
 
