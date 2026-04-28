@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Student Profile | DropoutGuard</title>
+    <link rel="stylesheet" href="css/style.css"/>
+    <link rel="stylesheet" href="css/profile.css"/>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+<nav class="navbar">
+    <div class="nav-brand">🎓 DropoutGuard</div>
+    <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="add-student.html">Add Student</a></li>
+        <li><a href="dashboard.html">Dashboard</a></li>
+        <li><a href="compare.html">Compare</a></li>
+        <li><a href="#" onclick="logout()">Logout</a></li>
+    </ul>
+</nav>
+
+<!-- Hero Banner -->
+<div class="profile-hero" id="profileHero" style="display:none">
+    <div class="hero-bg-blur"></div>
+    <div class="profile-hero-inner">
+        <div class="profile-avatar-lg" id="profileAvatar"></div>
+        <div class="profile-hero-info">
+            <div class="profile-hero-name" id="profileName">—</div>
+            <div id="profileRiskBadge" class="risk-badge"></div>
+            <div class="profile-hero-meta" id="profileMeta"></div>
+        </div>
+        <div class="profile-hero-actions">
+            <button class="btn btn-outline" onclick="openEditModal()">✏️ Edit</button>
+            <button class="btn btn-danger" onclick="deleteStudent()">🗑️ Delete</button>
+            <a href="dashboard.html" class="btn btn-outline">← Back</a>
+        </div>
+    </div>
+</div>
+
+<main class="profile-main" id="profileMain" style="display:none">
+
+    <!-- Stat Cards -->
+    <div class="profile-stats-grid">
+        <div class="pstat-card" id="sc-attendance">
+            <div class="pstat-icon">📅</div>
+            <div class="pstat-value" id="statAttendance">—</div>
+            <div class="pstat-label">Attendance</div>
+            <div class="pstat-bar"><div class="pstat-fill" id="barAttendance"></div></div>
+        </div>
+        <div class="pstat-card" id="sc-gpa">
+            <div class="pstat-icon">📖</div>
+            <div class="pstat-value" id="statGpa">—</div>
+            <div class="pstat-label">GPA</div>
+            <div class="pstat-bar"><div class="pstat-fill" id="barGpa"></div></div>
+        </div>
+        <div class="pstat-card" id="sc-behavior">
+            <div class="pstat-icon">🧠</div>
+            <div class="pstat-value" id="statBehavior">—</div>
+            <div class="pstat-label">Behavior</div>
+            <div class="pstat-bar"><div class="pstat-fill" id="barBehavior"></div></div>
+        </div>
+        <div class="pstat-card" id="sc-engagement">
+            <div class="pstat-icon">⚡</div>
+            <div class="pstat-value" id="statEngagement">—</div>
+            <div class="pstat-label">Engagement</div>
+            <div class="pstat-bar"><div class="pstat-fill" id="barEngagement"></div></div>
+        </div>
+        <div class="pstat-card stress" id="sc-stress">
+            <div class="pstat-icon">😰</div>
+            <div class="pstat-value" id="statStress">—</div>
+            <div class="pstat-label">Stress Level</div>
+            <div class="pstat-bar"><div class="pstat-fill stress-fill" id="barStress"></div></div>
+        </div>
+        <div class="pstat-card" id="sc-income">
+            <div class="pstat-icon">💰</div>
+            <div class="pstat-value" id="statIncome">—</div>
+            <div class="pstat-label">Family Income</div>
+        </div>
+        <div class="pstat-card" id="sc-fee">
+            <div class="pstat-icon">🧾</div>
+            <div class="pstat-value" id="statFee">—</div>
+            <div class="pstat-label">Fee Status</div>
+        </div>
+        <div class="pstat-card" id="sc-scholarship">
+            <div class="pstat-icon">🏅</div>
+            <div class="pstat-value" id="statScholarship">—</div>
+            <div class="pstat-label">Scholarship</div>
+        </div>
+    </div>
+
+    <!-- Trend Chart -->
+    <div class="profile-section glass">
+        <div class="section-header">
+            <span class="section-icon">📈</span>
+            <h3>Risk Trend Over Time</h3>
+        </div>
+        <canvas id="trendChart" height="110"></canvas>
+    </div>
+
+    <!-- Notes + Interventions -->
+    <div class="profile-bottom-grid">
+
+        <!-- Notes -->
+        <div class="profile-section glass">
+            <div class="section-header">
+                <span class="section-icon">📝</span>
+                <h3>Teacher Notes</h3>
+            </div>
+            <div class="note-input-row">
+                <input type="text" id="noteInput" class="note-input" placeholder="Write a note about this student..."/>
+                <button class="btn btn-primary" onclick="addNote()">Add</button>
+            </div>
+            <div id="notesList" class="notes-list"></div>
+        </div>
+
+        <!-- Interventions -->
+        <div class="profile-section glass">
+            <div class="section-header">
+                <span class="section-icon">💡</span>
+                <h3>Recommended Interventions</h3>
+            </div>
+            <div id="profileInterventions" class="intervention-list"></div>
+        </div>
+
+    </div>
+</main>
+
+<!-- Edit Modal -->
+<div id="editModal" class="modal-overlay" style="display:none">
+    <div class="modal-card glass">
+        <div class="modal-header">
+            <h3>✏️ Edit Student</h3>
+            <button onclick="closeEditModal()" class="modal-close">✕</button>
+        </div>
+        <form onsubmit="saveEdit(event)">
+            <div class="form-row">
+                <div class="form-group"><label>Name</label><input type="text" id="editName" required/></div>
+                <div class="form-group"><label>Attendance (%)</label><input type="number" id="editAttendance" min="0" max="100" required/></div>
+            </div>
+            <div class="form-row">
+                <div class="form-group"><label>GPA (0-10)</label><input type="number" id="editGpa" min="0" max="10" step="0.1" required/></div>
+                <div class="form-group"><label>Behavior (1-10)</label><input type="number" id="editBehavior" min="1" max="10" required/></div>
+            </div>
+            <div class="form-row">
+                <div class="form-group"><label>Engagement (1-10)</label><input type="number" id="editEngagement" min="1" max="10" required/></div>
+                <div class="form-group"><label>Stress (1-10)</label><input type="number" id="editStress" min="1" max="10" required/></div>
+            </div>
+            <div class="form-row">
+                <div class="form-group"><label>Family Income</label><input type="number" id="editIncome" min="0" required/></div>
+                <div class="form-group"><label>Fee Status</label>
+                    <select id="editFeeStatus"><option value="PAID">Paid</option><option value="PENDING">Pending</option></select>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group"><label>Scholarship</label>
+                    <select id="editScholarship"><option value="true">Yes</option><option value="false">No</option></select>
+                </div>
+                <div class="form-group"><label>Counseling</label>
+                    <select id="editCounseling"><option value="true">Yes</option><option value="false">No</option></select>
+                </div>
+            </div>
+            <div style="display:flex;gap:1rem;margin-top:1.25rem">
+                <button type="submit" class="btn btn-primary">Save Changes</button>
+                <button type="button" class="btn btn-outline" onclick="closeEditModal()">Cancel</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="js/auth.js"></script>
+<script src="js/profile.js"></script>
+<script>requireAuth(); loadProfile();</script>
+</body>
+</html>

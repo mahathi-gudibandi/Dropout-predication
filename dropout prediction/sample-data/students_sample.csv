@@ -1,0 +1,21 @@
+Name,Attendance,GPA,Behavior,Engagement,Income,Scholarship,FeeStatus,Counseling,StressLevel,ParentEmail
+Alice Johnson,85,8.2,8,9,45000,true,PAID,false,3,parent1@gmail.com
+Bob Smith,55,4.1,4,3,8000,false,PENDING,false,9,parent2@gmail.com
+Carol White,92,9.0,9,10,60000,true,PAID,true,2,parent3@gmail.com
+David Brown,48,3.5,3,2,5000,false,PENDING,false,10,parent4@gmail.com
+Emma Davis,78,7.5,7,8,35000,true,PAID,true,4,parent5@gmail.com
+Frank Miller,62,5.8,5,5,12000,false,PENDING,false,7,parent6@gmail.com
+Grace Wilson,90,8.8,9,9,55000,true,PAID,true,2,parent7@gmail.com
+Henry Moore,40,2.9,2,2,4000,false,PENDING,false,10,parent8@gmail.com
+Isabella Taylor,73,6.5,6,6,22000,false,PENDING,true,6,parent9@gmail.com
+James Anderson,88,8.0,8,8,48000,true,PAID,false,3,parent10@gmail.com
+Karen Thomas,58,4.8,4,4,9000,false,PENDING,false,8,parent11@gmail.com
+Liam Jackson,95,9.5,10,10,70000,true,PAID,false,1,parent12@gmail.com
+Mia Harris,67,5.2,5,4,11000,false,PENDING,false,8,parent13@gmail.com
+Noah Martin,82,7.8,7,7,40000,true,PAID,true,4,parent14@gmail.com
+Olivia Garcia,44,3.2,3,3,6000,false,PENDING,false,9,parent15@gmail.com
+Peter Martinez,76,7.0,7,7,30000,false,PAID,true,5,parent16@gmail.com
+Quinn Robinson,51,4.5,4,3,7500,false,PENDING,false,9,parent17@gmail.com
+Rachel Clark,89,8.5,8,9,52000,true,PAID,false,2,parent18@gmail.com
+Samuel Rodriguez,63,5.5,5,5,13000,false,PENDING,true,7,parent19@gmail.com
+Tina Lewis,97,9.8,10,10,80000,true,PAID,false,1,parent20@gmail.com

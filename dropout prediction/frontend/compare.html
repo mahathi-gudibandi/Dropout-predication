@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Compare Students | DropoutGuard</title>
+    <link rel="stylesheet" href="css/style.css"/>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+<nav class="navbar">
+    <div class="nav-brand">🎓 DropoutGuard</div>
+    <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="add-student.html">Add Student</a></li>
+        <li><a href="dashboard.html">Dashboard</a></li>
+        <li><a href="#" onclick="logout()">Logout</a></li>
+    </ul>
+</nav>
+
+<main class="dashboard-container">
+    <div class="dashboard-header">
+        <h2>Compare Students</h2>
+    </div>
+
+    <!-- Selectors -->
+    <div class="compare-selectors glass" style="padding:1.5rem; margin-bottom:1.5rem">
+        <div class="form-row">
+            <div class="form-group">
+                <label>Student A</label>
+                <select id="selectA" onchange="runCompare()">
+                    <option value="">-- Select Student --</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Student B</label>
+                <select id="selectB" onchange="runCompare()">
+                    <option value="">-- Select Student --</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <!-- Compare Cards -->
+    <div id="compareResult" style="display:none">
+        <div class="compare-cards">
+            <div class="compare-card glass" id="cardA"></div>
+            <div class="vs-divider">VS</div>
+            <div class="compare-card glass" id="cardB"></div>
+        </div>
+
+        <!-- Radar Chart -->
+        <div class="chart-card glass" style="margin-top:1.5rem; padding:2rem">
+            <h3>Side-by-Side Comparison</h3>
+            <canvas id="radarChart" height="350"></canvas>
+        </div>
+    </div>
+
+    <div id="comparePlaceholder" class="loading" style="margin-top:3rem">
+        Select two students above to compare them.
+    </div>
+</main>
+
+<script src="js/auth.js"></script>
+<script src="js/compare.js"></script>
+<script>requireAuth(); initCompare();</script>
+</body>
+</html>

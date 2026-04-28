@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Dashboard | DropoutGuard</title>
+    <link rel="stylesheet" href="css/style.css"/>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+<nav class="navbar">
+    <div class="nav-brand">🎓 DropoutGuard</div>
+    <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="add-student.html">Add Student</a></li>
+        <li><a href="dashboard.html">Dashboard</a></li>
+        <li><a href="compare.html">Compare</a></li>
+        <li><a href="#" onclick="logout()">Logout</a></li>
+    </ul>
+</nav>
+
+<main class="dashboard-container">
+
+    <div class="dashboard-header">
+        <h2>Student Dashboard</h2>
+        <div style="display:flex; gap:0.75rem; flex-wrap:wrap">
+            <button class="btn btn-outline" onclick="downloadCSV()">⬇️ Export CSV</button>
+            <button class="btn btn-outline" onclick="openImport()">⬆️ Import CSV</button>
+            <a href="compare.html" class="btn btn-outline">⚖️ Compare</a>
+            <a href="add-student.html" class="btn btn-primary">+ Add Student</a>
+        </div>
+    </div>
+
+    <!-- Summary Cards -->
+    <div class="summary-cards">
+        <div class="summary-card glass">
+            <div class="card-icon-wrap purple">👥</div>
+            <div><div class="card-value" id="totalCount">—</div><div class="card-label">Total Students</div></div>
+        </div>
+        <div class="summary-card glass">
+            <div class="card-icon-wrap green">🟢</div>
+            <div><div class="card-value" id="lowCount">—</div><div class="card-label">Low Risk</div></div>
+        </div>
+        <div class="summary-card glass">
+            <div class="card-icon-wrap yellow">🟡</div>
+            <div><div class="card-value" id="mediumCount">—</div><div class="card-label">Medium Risk</div></div>
+        </div>
+        <div class="summary-card glass">
+            <div class="card-icon-wrap red">🔴</div>
+            <div><div class="card-value" id="highCount">—</div><div class="card-label">High Risk</div></div>
+        </div>
+    </div>
+
+    <!-- Charts -->
+    <div class="charts-row">
+        <div class="chart-card glass">
+            <h3>Risk Distribution</h3>
+            <canvas id="riskPieChart" width="280" height="280"></canvas>
+        </div>
+        <div class="chart-card glass">
+            <h3>Attendance vs GPA by Risk</h3>
+            <canvas id="scatterChart" width="420" height="280"></canvas>
+        </div>
+    </div>
+
+    <!-- Filter Bar -->
+    <div class="filter-bar">
+        <label>Filter:</label>
+        <select id="riskFilter" onchange="filterStudents()">
+            <option value="ALL">All Risk Levels</option>
+            <option value="LOW">🟢 Low</option>
+            <option value="MEDIUM">🟡 Medium</option>
+            <option value="HIGH">🔴 High</option>
+        </select>
+        <input type="text" id="searchInput" placeholder="🔍 Search by name..." oninput="filterStudents()"/>
+    </div>
+
+    <!-- Table -->
+    <div class="table-wrapper">
+        <table class="student-table">
+            <thead>
+                <tr>
+                    <th>#</th><th>Name</th><th>Attendance</th><th>GPA</th>
+                    <th>Behavior</th><th>Engagement</th><th>Stress</th>
+                    <th>Fee</th><th>Risk</th><th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="studentTableBody">
+                <tr><td colspan="10" class="loading">Loading students...</td></tr>
+            </tbody>
+        </table>
+    </div>
+</main>
+
+<!-- Import Modal -->
+<div id="importModal" class="modal-overlay" style="display:none">
+    <div class="modal-card glass">
+        <div class="modal-header">
+            <h3>Bulk Import Students</h3>
+            <button onclick="closeImport()" class="modal-close">✕</button>
+        </div>
+        <p style="color:var(--text-muted); font-size:0.875rem; margin-bottom:1rem">
+            Upload a <strong>.xlsx</strong> (Excel) or <strong>.csv</strong> file.<br/>
+            Columns: <code style="color:#a89cff">Name, Attendance, GPA, Behavior, Engagement, Income, Scholarship, FeeStatus, Counseling, StressLevel, ParentEmail</code>
+        </p>
+        <a href="../sample-data/students_sample.csv" download class="btn btn-outline" style="font-size:0.8rem; margin-bottom:1rem; display:inline-block">
+            ⬇️ Download Sample CSV
+        </a>
+        <form onsubmit="handleImport(event)">
+            <div class="form-group">
+                <label>Excel or CSV File</label>
+                <input type="file" id="csvFile" accept=".csv,.xlsx,.xls" required style="color:var(--text)"/>
+            </div>
+            <div style="display:flex; gap:1rem; margin-top:1rem">
+                <button type="submit" class="btn btn-primary">Import</button>
+                <button type="button" class="btn btn-outline" onclick="closeImport()">Cancel</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="js/auth.js"></script>
+<script src="js/dashboard.js"></script>
+<script>requireAuth(); loadDashboard();</script>
+</body>
+</html>

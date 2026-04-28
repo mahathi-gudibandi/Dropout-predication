@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Student Dropout Prediction System</title>
+    <link rel="stylesheet" href="css/style.css"/>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="nav-brand">🎓 DropoutGuard</div>
+    <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="add-student.html" id="navAddStudent" style="display:none">Add Student</a></li>
+        <li><a href="dashboard.html" id="navDashboard" style="display:none">Dashboard</a></li>
+        <li><a href="login.html" id="navLogin">Login</a></li>
+        <li><a href="#" id="navLogout" style="display:none" onclick="logout()">Logout</a></li>
+    </ul>
+</nav>
+
+<main class="hero">
+    <!-- Badge -->
+    <div class="hero-badge">✦ AI-Powered Early Intervention System</div>
+
+    <div class="hero-content">
+        <h1>Predict. Prevent.<br/>Protect Students.</h1>
+        <p>Identify at-risk students before it's too late. Our intelligent system analyzes academic, behavioral, financial, and psychological signals to flag dropout risk early.</p>
+        <div class="hero-buttons">
+            <a href="login.html" class="btn btn-primary" id="heroLogin">Get Started →</a>
+            <a href="dashboard.html" class="btn btn-outline" id="heroDashboard" style="display:none">View Dashboard</a>
+        </div>
+    </div>
+
+    <!-- Stats -->
+    <div class="hero-stats">
+        <div class="stat-item">
+            <div class="stat-value">4</div>
+            <div class="stat-label">Risk Factors Analyzed</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-value">3</div>
+            <div class="stat-label">Risk Levels</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-value">10+</div>
+            <div class="stat-label">Data Points Per Student</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-value">Real-time</div>
+            <div class="stat-label">Predictions</div>
+        </div>
+    </div>
+
+    <!-- Feature Cards -->
+    <div class="features">
+        <div class="feature-card glass">
+            <div class="feature-icon purple">📊</div>
+            <h3>Multi-Factor Analysis</h3>
+            <p>Combines academic performance, attendance, behavior, engagement, financial status, and stress levels into one unified risk score.</p>
+        </div>
+        <div class="feature-card glass">
+            <div class="feature-icon pink">🔮</div>
+            <h3>Instant Prediction</h3>
+            <p>Get Low, Medium, or High dropout risk classification the moment you submit student data — no waiting, no guessing.</p>
+        </div>
+        <div class="feature-card glass">
+            <div class="feature-icon green">💡</div>
+            <h3>Smart Interventions</h3>
+            <p>Receive targeted, actionable suggestions — from academic tutoring to financial aid and counseling referrals.</p>
+        </div>
+    </div>
+</main>
+
+<script src="js/auth.js"></script>
+<script>updateNav();</script>
+</body>
+</html>
